@@ -42,10 +42,10 @@ class StorageActivity : AppCompatActivity() {
         val now = Date()
         val filename = formatter.format(now)
         val storageReference = FirebaseStorage.getInstance()
-        val listRef = storageReference.reference.child("images/").child()
+        val listRef = storageReference.reference.child("images/").child($filename)
 
         storageReference.putFile(uri).addOnSuccessListener {
-            binding.firebaseimage.setImageURI(null)
+            binding.firebaseimage.setImageURI(uri)
             Toast.makeText(this@StorageActivity, "success upload", Toast.LENGTH_SHORT).show()
             if(progressDialog.isShowing) progressDialog.dismiss()
         }.addOnFailureListener{

@@ -38,13 +38,12 @@ class StorageActivity : AppCompatActivity() {
         progressDialog.setCancelable(false)
         progressDialog.show()
 
-        val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
-        val now = Date()
-        val filename = formatter.format(now)
+        val fileName = "IMAGE_${SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Date())}_.png"
+       
         val storageReference = FirebaseStorage.getInstance()
-        val listRef = storageReference.reference.child("images/").child($filename)
+        val imageRef = storageReference.reference.child("images/").child(fileName)
 
-        storageReference.putFile(uri).addOnSuccessListener {
+       .putFile(uri).addOnSuccessListener {
             binding.firebaseimage.setImageURI(uri)
             Toast.makeText(this@StorageActivity, "success upload", Toast.LENGTH_SHORT).show()
             if(progressDialog.isShowing) progressDialog.dismiss()

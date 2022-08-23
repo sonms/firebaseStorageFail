@@ -41,7 +41,7 @@ class StorageActivity : AppCompatActivity() {
         val fileName = "IMAGE_${SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Date())}_.png"
        
         val storageReference = FirebaseStorage.getInstance()
-        val imageRef = storageReference.reference.child("images/").child(fileName)
+        val imageRef = storageReference!!.reference.child("images/").child(fileName)
 
        .putFile(uri).addOnSuccessListener {
             binding.firebaseimage.setImageURI(uri)

@@ -43,7 +43,7 @@ class StorageActivity : AppCompatActivity() {
         val storageReference = FirebaseStorage.getInstance()
         val imageRef = storageReference!!.reference.child("images/").child(fileName)
 
-       .putFile(uri).addOnSuccessListener {
+       imageRef.putFile(uri).addOnSuccessListener {
             binding.firebaseimage.setImageURI(uri)
             Toast.makeText(this@StorageActivity, "success upload", Toast.LENGTH_SHORT).show()
             if(progressDialog.isShowing) progressDialog.dismiss()

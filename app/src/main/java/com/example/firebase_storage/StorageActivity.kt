@@ -23,7 +23,9 @@ class StorageActivity : AppCompatActivity() {
         //(이 함수의 내부에서 layout inflater가 실행되어 view들을 객체화한다.)
         binding = ActivityStorageBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_storage)
-
+        
+        binding.firebaseimage.setImageURI(uri)
+        
         binding.selectBtn.setOnClickListener {
             selectImage()
         }
@@ -41,12 +43,11 @@ class StorageActivity : AppCompatActivity() {
         val imageRef = storageReference!!.reference.child("images/").child(fileName)
 
        imageRef.putFile(uri).addOnSuccessListener {
-            binding.firebaseimage.setImageURI(uri)
+            
             Toast.makeText(this@StorageActivity, "success upload", Toast.LENGTH_SHORT).show()
-            if(progressDialog.isShowing) progressDialog.dismiss()
+            
         }.addOnFailureListener{
-            if (progressDialog.isShowing) progressDialog.dismiss()
-
+            
         Toast.makeText(this@StorageActivity, "Failed",Toast.LENGTH_SHORT).show()
         }
     }

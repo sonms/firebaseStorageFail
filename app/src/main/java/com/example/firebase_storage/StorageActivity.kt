@@ -33,14 +33,11 @@ class StorageActivity : AppCompatActivity() {
     }
 
     private fun uploadImage() {
-        val progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("uploadFile ...")
-        progressDialog.setCancelable(false)
-        progressDialog.show()
+       
 
         val fileName = "IMAGE_${SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Date())}_.png"
        
-        val storageReference = FirebaseStorage.getInstance()
+        val storageReference : FirebaseStorage = FirebaseStorage.getInstance()
         val imageRef = storageReference!!.reference.child("images/").child(fileName)
 
        imageRef.putFile(uri).addOnSuccessListener {
